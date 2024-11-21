@@ -1,0 +1,17 @@
+syntax = "proto3";
+package intravision.intravision;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "intravision/intravision/params.proto";
+
+option go_package = "github.com/merlingo/intravision/x/intravision/types";
+
+// GenesisState defines the intravision module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

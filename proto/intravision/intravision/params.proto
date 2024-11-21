@@ -1,0 +1,15 @@
+syntax = "proto3";
+package intravision.intravision;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/merlingo/intravision/x/intravision/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "intravision/x/intravision/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
