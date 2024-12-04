@@ -1,0 +1,14 @@
+syntax = "proto3";
+package intravision.labour;
+
+option go_package = "github.com/merlingo/intravision/x/labour/types";
+
+message Activity {
+  uint64 id = 1;
+  string worker = 2; 
+  uint64 beginWork = 3; 
+  uint64 finishWork = 4; 
+  int32 workingTime = 5; 
+  string taskId = 6; 
+  
+}

@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package intravision.labour;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "intravision/labour/params.proto";
+import "intravision/labour/task.proto";
+import "intravision/labour/activity.proto";
+
+option go_package = "github.com/merlingo/intravision/x/labour/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/merlingo/intravision/labour/params";
+  
+  }
+  
+  // Queries a list of Task items.
+  rpc Task    (QueryGetTaskRequest) returns (QueryGetTaskResponse) {
+    option (google.api.http).get = "/merlingo/intravision/labour/task/{id}";
+  
+  }
+  rpc TaskAll (QueryAllTaskRequest) returns (QueryAllTaskResponse) {
+    option (google.api.http).get = "/merlingo/intravision/labour/task";
+  
+  }
+  
+  // Queries a list of Activity items.
+  rpc Activity    (QueryGetActivityRequest) returns (QueryGetActivityResponse) {
+    option (google.api.http).get = "/merlingo/intravision/labour/activity/{id}";
+  
+  }
+  rpc LastActivity    (QueryLastActivityRequest) returns (QueryLastActivityResponse) {
+    option (google.api.http).get = "/merlingo/intravision/labour/activity/{worker}";
+  
+  }
+  rpc ActivityAll (QueryAllActivityRequest) returns (QueryAllActivityResponse) {
+    option (google.api.http).get = "/merlingo/intravision/labour/activity";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetTaskRequest {
+  uint64 id = 1;
+}
+
+message QueryGetTaskResponse {
+  Task Task = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllTaskRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTaskResponse {
+  repeated Task                                   Task       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetActivityRequest {
+  uint64 id = 1;
+}
+
+message QueryGetActivityResponse {
+  Activity Activity = 1 [(gogoproto.nullable) = false];
+}
+message QueryLastActivityRequest {
+  string worker = 1;
+}
+message QueryLastActivityResponse {
+  Activity Activity = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllActivityRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string worker = 2; 
+  string taskid = 3;
+}
+
+message QueryAllActivityResponse {
+  repeated Activity                               Activity   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

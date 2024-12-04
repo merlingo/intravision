@@ -53,9 +53,15 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
+	gainsharingmodulev1 "github.com/merlingo/intravision/api/intravision/gainsharing/module"
 	intravisionmodulev1 "github.com/merlingo/intravision/api/intravision/intravision/module"
+	labourmodulev1 "github.com/merlingo/intravision/api/intravision/labour/module"
+	_ "github.com/merlingo/intravision/x/gainsharing/module" // import for side-effects
+	gainsharingmoduletypes "github.com/merlingo/intravision/x/gainsharing/types"
 	_ "github.com/merlingo/intravision/x/intravision/module" // import for side-effects
 	intravisionmoduletypes "github.com/merlingo/intravision/x/intravision/types"
+	_ "github.com/merlingo/intravision/x/labour/module" // import for side-effects
+	labourmoduletypes "github.com/merlingo/intravision/x/labour/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -94,6 +100,8 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		intravisionmoduletypes.ModuleName,
+		labourmoduletypes.ModuleName,
+		gainsharingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -119,6 +127,8 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		intravisionmoduletypes.ModuleName,
+		labourmoduletypes.ModuleName,
+		gainsharingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -138,6 +148,8 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		intravisionmoduletypes.ModuleName,
+		labourmoduletypes.ModuleName,
+		gainsharingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -158,6 +170,7 @@ var (
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: ibcfeetypes.ModuleName},
 		{Account: icatypes.ModuleName},
+		{Account: gainsharingmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 
@@ -296,6 +309,14 @@ var (
 			{
 				Name:   intravisionmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&intravisionmodulev1.Module{}),
+			},
+			{
+				Name:   labourmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&labourmodulev1.Module{}),
+			},
+			{
+				Name:   gainsharingmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&gainsharingmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

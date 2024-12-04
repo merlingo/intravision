@@ -76,6 +76,9 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	intravisionmodulekeeper "github.com/merlingo/intravision/x/intravision/keeper"
+	labourmodulekeeper "github.com/merlingo/intravision/x/labour/keeper"
+
+	gainsharingmodulekeeper "github.com/merlingo/intravision/x/gainsharing/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"github.com/merlingo/intravision/docs"
@@ -142,6 +145,8 @@ type App struct {
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
 	IntravisionKeeper intravisionmodulekeeper.Keeper
+	LabourKeeper      labourmodulekeeper.Keeper
+	GainsharingKeeper gainsharingmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -246,6 +251,8 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.IntravisionKeeper,
+		&app.LabourKeeper,
+		&app.GainsharingKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

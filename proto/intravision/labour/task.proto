@@ -1,0 +1,18 @@
+syntax = "proto3";
+package intravision.labour;
+import "cosmos/base/v1beta1/coin.proto"; 
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/merlingo/intravision/x/labour/types";
+
+message Task {
+  uint64 id = 1;
+  string taskId = 2; 
+  string assigner = 3; 
+  int32 state = 4; 
+  uint64 beginTask = 5; 
+  uint64 deadline = 6; 
+  uint64 finishTask = 7; 
+  cosmos.base.v1beta1.Coin wager = 8 [(gogoproto.nullable) = false]; 
+  
+}

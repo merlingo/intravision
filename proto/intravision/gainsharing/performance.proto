@@ -1,0 +1,16 @@
+syntax = "proto3";
+package intravision.gainsharing;
+
+option go_package = "github.com/merlingo/intravision/x/gainsharing/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+
+message Performance {
+  uint64 id = 1;
+  int32 mid = 2; 
+  string tid = 3; 
+  cosmos.base.v1beta1.Coin wager = 4 [(gogoproto.nullable) = false]; 
+  cosmos.base.v1beta1.Coin reward = 5 [(gogoproto.nullable) = false]; 
+  string earner = 6; 
+  
+}

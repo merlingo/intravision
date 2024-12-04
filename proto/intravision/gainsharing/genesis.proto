@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package intravision.gainsharing;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "intravision/gainsharing/params.proto";
+import "intravision/gainsharing/mechanism.proto";
+import "intravision/gainsharing/performance.proto";
+
+option go_package = "github.com/merlingo/intravision/x/gainsharing/types";
+
+// GenesisState defines the gainsharing module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params      params           = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Mechanism   mechanismList    = 2 [(gogoproto.nullable) = false] ;
+           uint64      mechanismCount   = 3;
+  repeated Performance performanceList  = 4 [(gogoproto.nullable) = false] ;
+           uint64      performanceCount = 5;
+}
+

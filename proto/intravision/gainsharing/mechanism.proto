@@ -1,0 +1,13 @@
+syntax = "proto3";
+package intravision.gainsharing;
+
+option go_package = "github.com/merlingo/intravision/x/gainsharing/types";
+
+message Mechanism {
+  uint64 id = 1;
+  string metrics = 2; 
+  string coefficients = 3; 
+  string convergeLimit = 4; 
+  string slope = 5; 
+  
+}

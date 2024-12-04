@@ -1,0 +1,15 @@
+syntax = "proto3";
+package intravision.labour;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/merlingo/intravision/x/labour/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "intravision/x/labour/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
