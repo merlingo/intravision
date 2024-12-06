@@ -59,9 +59,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "BeginTask",
-					Use:            "begin-task [taskid] [assigner] [begin-task] [deadline]",
+					Use:            "begin-task [taskid] [assigner] [begin-task] [deadline] [wager]",
 					Short:          "Send a beginTask tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "taskid"}, {ProtoField: "assigner"}, {ProtoField: "beginTask"}, {ProtoField: "deadline"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "taskid"}, {ProtoField: "assigner"}, {ProtoField: "beginTask"}, {ProtoField: "deadline"}, {ProtoField: "wager"}},
 				},
 				{
 					RpcMethod:      "FinishTask",

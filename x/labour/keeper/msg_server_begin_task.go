@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/merlingo/intravision/x/labour/types"
 )
@@ -27,12 +28,17 @@ func (k msgServer) BeginTask(goCtx context.Context, msg *types.MsgBeginTask) (*t
 	if err != nil {
 		return nil, err
 	}
-	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, sdk.AccAddress(task.Assigner), types.ModuleName, sdk.NewCoins(msg.GetWager()))
-	if err != nil {
-		return nil, err
+	wager, _ := sdk.ParseCoinsNormalized(msg.Wager)
+	if !wager.IsValid() {
+		return nil, errorsmod.Wrap(types.ErrSample, "amount is not a valid Coins object")
 	}
 	id := k.Keeper.AppendTask(ctx, task)
 	ctx.GasMeter().ConsumeGas(types.BeginTaskGas, "Create New Task")
+
+	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, sdk.AccAddress(task.Assigner), types.ModuleName, wager)
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgBeginTaskResponse{Id: id}, nil
 }

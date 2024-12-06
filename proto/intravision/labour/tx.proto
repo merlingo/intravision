@@ -61,7 +61,7 @@ message MsgBeginTask {
   string assigner  = 3;
   uint64 beginTask = 4;
   uint64 deadline  = 5;
-  cosmos.base.v1beta1.Coin wager = 6 [(gogoproto.nullable) = false]; 
+  string wager = 6 ; 
 }
 
 message MsgBeginTaskResponse {
